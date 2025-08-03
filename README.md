@@ -185,7 +185,7 @@ EOF
 
 ### Development
 
-After doing your changes to the sources you can build the project using the provided scripts:
+After making changes to the source code, you can build the project using the provided scripts:
 
 ### Build the Go binary
 
@@ -222,7 +222,20 @@ For example, to start the web UI:
 ./auroraboot web --create-worker
 ```
 
-### Command Line Reference
+### Example: Run the Web UI with Docker
+
+To start the web UI with a local worker using Docker:
+
+```
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+           --privileged \
+           -v $PWD/build/:/output \
+           -p 8080:8080 \
+           quay.io/kairos/auroraboot:local web --create-worker
+```
+
+> **Note:**
+> When running auroraboot in a container, ensure you mount the Docker socket (`/var/run/docker.sock`) and set the `--privileged` flag to allow access to the host's Docker daemon. If auroraboot fails without warning, there may be an issue with the mounted Docker socket. In such cases, removing `-v /var/run/docker.sock:/var/run/docker.sock` may resolve the issue.
 
 #### Commands
 
