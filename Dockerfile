@@ -89,6 +89,8 @@ COPY --from=luet /usr/bin/luet /usr/bin/luet
 COPY image-assets/luet-arm64.yaml /tmp/luet-arm64.yaml
 COPY image-assets/luet-amd64.yaml /tmp/luet-amd64.yaml
 # Set the default luet config to the current build arch
+ARG TARGETARCH=amd64
+ENV TARGETARCH=${TARGETARCH}
 RUN mkdir -p /etc/luet/
 RUN cp /tmp/luet-${TARGETARCH}.yaml /etc/luet/luet.yaml
 ## Uki artifacts, will be set under the /usr/kairos directory
